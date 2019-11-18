@@ -1,0 +1,117 @@
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <style>
+    
+    #p1{
+        color: red;
+        font-size: 30px;
+    }
+    
+    </style>
+</head>
+
+<body id='mom'>
+    <p>Type in number of Boxes between 1 - 100 to generate</p>
+    <p id = 'p1'>You have 2 seconds to remember the order of button colors</p>
+    <input type="text" id='number'>
+    <button id='butt'>GO</button>
+    
+
+    <script>
+
+        document.getElementById('butt').onclick = clickhandler;
+
+
+
+        let arrayButtons = [];
+
+        function Button(color, width, height, top, left, order) {
+            this.order;
+            this.create_id = function (i) {
+                let btn = document.createElement('button');
+                btn.setAttribute('id', 'Button' +i);
+                document.body.appendChild(btn);
+                btn.style.backgroundColor = getRandomColor();
+                btn.style.width = this.width;
+                btn.height = this.height;
+                btn.style.position = 'initial';
+                btn.style.top = this.top;
+                btn.style.left = this.left;
+                
+                btn.innerHTML = 'Which one is first? ';
+            }
+        }
+
+        function clickhandler() {
+            var val1 = document.getElementById('number').value;
+            val = parseInt(val1);
+            creator(val);
+
+
+        }
+        function creator(num) {
+            if (num > 0 && num <= 100) {
+                let myleft = 25;
+                let mytop = 100;
+                let counter = 0;
+                for (i = 0; i < val; i++) {
+                    buts = new Button(getRandomColor(), "100px", '250px', mytop + 'px', (myleft + i * 100) + 'px', i);
+                    buts.create_id(i);
+                    arrayButtons.push('Button'+i); 
+                    setTimeout(moveButton, 2000);
+                    let clickButton = document.getElementById('Button'+i);
+                    let buttonID = 'Button'+i
+                    clickButton.onclick = function(checkArray) {
+                    if (buttonID == arrayButtons[counter]){
+                        counter += 1;
+                        alert('Nice. There are ' + (num-counter) + ' buttons remaining.');
+
+                        if (counter >= num){
+                            alert('Excellent Memory! Refresh to play again.');
+                        }else{
+
+                        }
+                    }
+                    else {
+                        alert('Wrong order!');
+                        // document.getElementById('ans').innerHTML = 'Wrong order!';
+                    }
+
+
+
+                }
+
+            }
+           
+        } else {
+                alert('ERROR!!  Please enter a number from 0 to 100')
+            }
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function moveButton() {
+            for (j = 0; j < arrayButtons.length; j++) {
+                document.getElementById('Button'+j).style.position = 'absolute';
+                document.getElementById('Button'+j).style.top = Math.random() * (window.innerHeight - 150);
+                document.getElementById('Button'+j).style.left = Math.random() * (window.innerWidth - 150);
+            }
+        }
+        console.log(arrayButtons)
+
+
+    </script>
+
+</body>
+
+</html>
