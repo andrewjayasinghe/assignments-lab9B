@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+</head>
+
+<body id='mom'>
+    <p>Type in number of Boxes to generate</p>
+    <input type="text" id='number'>
+    <button id='butt'>GO</button>
+    <p id='ans'></p>
+
+    <script>
+
+        document.getElementById('butt').onclick = creator;
+       
+
+
+
+        let arrayButtons = [];
+
+        function Button(color, width, height, top, left, order) {
+
+            var val1 = document.getElementById('number').value;
+            val = parseInt(val1);
+            this.order;
+            this.btn = document.createElement('button');
+            this.btn.style.backgroundColor = color;
+            this.btn.style.width = width;
+            this.btn.height = height;
+            this.btn.style.position = 'absolute';
+            this.btn.innerHTML = 'Click if you can!';
+            document.body.appendChild(this.btn);
+
+            this.setLocation = function (top, left) {
+                this.btn.style.top = top;
+                this.btn.style.left = left;
+            };
+
+            this.setLocation(top, left);
+          
+        }
+       
+        function creator() {
+            var val1 = document.getElementById('number').value;
+            val = parseInt(val1);
+            if(val > 0 && val <= 100){
+                let myleft = 25;
+                let mytop = 100 ;
+                for(i = 0; i < val; i++){      
+            arrayButtons.push(new Button(getRandomColor(), "100px", '350px',mytop+'px',(myleft+i*100)+'px', i));
+            
+            }
+            }
+            else{
+                alert('ERROR!!  Please enter a number from 0 to 100')
+            }
+
+
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+
+        setInterval(function () {
+            for (i = 0; i < arrayButtons.length; i++) {
+                arrayButtons[i].setLocation(
+                    (Math.random() * (window.innerHeight - 150)) + 'px',
+                    (Math.random() * (window.innerWidth - 150)) + 'px')
+            }
+        }, 1500);
+
+    </script>
+   
+</body>
+</html>
